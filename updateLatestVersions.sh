@@ -50,7 +50,7 @@ latest_calicoctl_version=$(curl -sSL https://github.com/projectcalico/calicoctl/
 #echo "Latest calicoctl version: ${latest_calicoctl_version}"
 latest_helm_version=$(curl -sSL https://api.github.com/repos/helm/helm/releases | jq -r '.[].tag_name' | grep '^v2' | grep -v '-' | tr -d 'v' | sort -V | tail -n 1)
 #echo "Latest helm 2 version: ${latest_helm_version}"
-latest_helm_version=$(curl -sSL https://api.github.com/repos/helm/helm/releases | jq -r '.[].tag_name' | grep '^v3' | grep -v '-' | tr -d 'v' | sort -V | tail -n 1)
+latest_helm3_version=$(curl -sSL https://api.github.com/repos/helm/helm/releases | jq -r '.[].tag_name' | grep '^v3' | grep -v '-' | tr -d 'v' | sort -V | tail -n 1)
 #echo "Latest helm 3 version: ${latest_helm3_version}"
 
 
