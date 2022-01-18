@@ -46,7 +46,7 @@ code_helm3_version=$(grep '^ARG HELM3_VERSION' Dockerfile | cut -d '=' -f2)
 # Get latest versions
 latest_kubectl_version=$(curl -sSL https://storage.googleapis.com/kubernetes-release/release/stable.txt | tr -d 'v')
 #echo "Latest kubectl version: ${latest_kubectl_version}"
-latest_calicoctl_version=$(curl -sSL https://github.com/projectcalico/calicoctl/releases | grep tree | sed 's/.*\(title=.*"\).*/\1/' | cut -d '=' -f2 | tr -d '"' | uniq | grep -v 'beta' | tr -d 'v' | sort -r | head -n 1)
+latest_calicoctl_version=$(curl -sSL https://github.com/projectcalico/calicoctl/releases | grep tree | sed 's/.*\(title=.*"\).*/\1/' | awk '{print $2}' | cut -d '"' -f2 | grep -v 'beta' | awk -F '/' '{print $NF}' | tr -d 'v' | sort -rV | uniq | head -n 1)
 #echo "Latest calicoctl version: ${latest_calicoctl_version}"
 latest_helm_version=$(curl -sSL https://api.github.com/repos/helm/helm/releases | jq -r '.[].tag_name' | grep '^v2' | grep -v '-' | tr -d 'v' | sort -V | tail -n 1)
 #echo "Latest helm 2 version: ${latest_helm_version}"
